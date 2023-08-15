@@ -84,7 +84,13 @@ const submit = () => {
                 >
                     Forgot your password?
                 </Link>
-
+                <span>&#160; or &#160;</span>
+                <Link
+                    :href="route('register')"
+                    class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                    Register?
+                </Link>
                 <Button color="black" type="submit" class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
                 </Button>
