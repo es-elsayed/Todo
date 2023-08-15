@@ -21,10 +21,10 @@ class AssingPermissionToUserRoleSeeder extends Seeder
     {
 
         return [
-            'users-create',
-            'users-read',
-            'users-update',
-            'users-delete',
+            'todos-create',
+            'todos-read',
+            'todos-update',
+            'todos-delete',
         ];
 
     }
