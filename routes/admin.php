@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PermissionRoleController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TodoController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CompleteTodoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +26,6 @@ Route::group(['middleware' => 'verified'], function () {
     Route::post('permissions/{permission}/role', PermissionRoleController::class)->name('roles.permission')->middleware("can:roles-update");
     Route::resource('permissions', PermissionController::class);
     Route::resource('users', UserController::class);
+    Route::put('todos/{todo}/complete', CompleteTodoController::class)->middleware('can:todos-update')->name('todos.complete');
+    Route::resource('todos', TodoController::class);
 });
