@@ -30,6 +30,12 @@ class Menu
                 'isActive' => request()->routeIs('admin.users.*'),
                 'isVisible' => request()->user()?->can('users-read'),
             ],
+            [
+                'label' => 'Todos',
+                'url' => route('admin.todos.index'),
+                'isActive' => request()->routeIs('admin.todos.*'),
+                'isVisible' => request()->user()?->can('todos-read'),
+            ],
             // [
             //     'label' => 'Categories',
             //     'url' => route('admin.categories.index'),
