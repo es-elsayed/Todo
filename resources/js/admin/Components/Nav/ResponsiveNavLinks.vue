@@ -11,9 +11,9 @@ defineProps({
     <!-- Responsive Navigation Menu -->
     <div :class="{ block: showNavigation, hidden: !showNavigation }" class="sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <ResponsiveNavLink :href="route('admin.dashboard')" :active="route().current('admin.dashboard')">
-                Dashboard
-            </ResponsiveNavLink>
+            <ResponsiveNavLink v-for="menu in $page.props.menus" v-show="menu.isVisible" :href="menu.url" :active="menu.isActive" :key="menu.label">
+            {{ menu.label }}
+        </ResponsiveNavLink>
         </div>
 
         <!-- Responsive Settings Options -->
