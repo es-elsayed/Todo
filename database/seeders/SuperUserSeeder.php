@@ -17,7 +17,7 @@ class SuperUserSeeder extends Seeder
         $admin = User::factory()->create([
             'name' => "Islam Abdu",
             'email' => 'islam3bdu@gmail.com',
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make(env(SUPER_USER_PASS)),
         ]);
 
         $admin->assignRole('super-admin');
