@@ -45,10 +45,10 @@ const classes = `inline-flex items-center  border border-transparent rounded-md 
 
 </script>
 <template>
-    <Link v-if="href" :href="href" :class="classes">
+    <Link v-if="href" :href="href" :class="classes" v-bind="$attrs">
     <slot />
     </Link>
-    <button v-else :class="classes" :type="type" :disabled="disabled">
+    <button v-else :class="classes" :type="type" :disabled="disabled" v-bind="$attrs">
         <slot />
     </button>
 </template>
