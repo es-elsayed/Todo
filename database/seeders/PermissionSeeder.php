@@ -32,6 +32,11 @@ class PermissionSeeder extends Seeder
             'todos-read',
             'todos-update',
             'todos-delete',
+
+            'tasks-create',
+            'tasks-read',
+            'tasks-update',
+            'tasks-delete',
         ];
 
         foreach ($permissions as $permission) {

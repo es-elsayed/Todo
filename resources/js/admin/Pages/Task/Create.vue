@@ -31,6 +31,7 @@ const props = defineProps({
 const form = useForm({
     title: props.item.title ?? "",
     description: props.item.description ?? "",
+    url: props.item.url ?? "",
 });
 
 
@@ -60,6 +61,8 @@ const submit = () => {
                     <InputGroup v-model="form.title" id="title" required label="Name" :error-message="form.errors.title" />
 
                     <InputGroup v-model="form.description" id="description" required label="Description" :error-message="form.errors.description" />
+
+                    <InputGroup v-model="form.url" id="url" required label="Url" :error-message="form.errors.url" />
 
                     <Button color="black" type="submit" :disabled="form.processing">
                         {{ form.processing ? 'Saving...' : 'Save' }}

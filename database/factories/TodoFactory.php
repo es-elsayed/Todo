@@ -22,7 +22,6 @@ class TodoFactory extends Factory
             'title' => fake()->title,
             'description' => fake()->realTextBetween,
             'completed_at' => fake()->boolean ? fake()->date : null,
-            'url' => fake()->url(),
             'user_id' => User::inRandomOrder()->first(), // You can customize how the roles are assigned (e.g., inRandomOrder(), first(), etc.)
         ];
     }

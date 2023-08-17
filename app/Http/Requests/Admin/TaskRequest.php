@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class TodoRequest extends FormRequest
+class TaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +25,8 @@ class TodoRequest extends FormRequest
         return [
             'title' => ['string', 'required'],
             'description' => ['string', 'nullable'],
+            'due_date' => ['nullable', 'time_stamp'],
+            'url' => ['bail', 'nullable', 'url:http,https', 'active_url'],
         ];
     }
 }

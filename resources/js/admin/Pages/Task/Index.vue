@@ -82,6 +82,11 @@ const complete = (item) => {
                             <input type="checkbox" name="completed_at" :checked="item.completed_at" @click="complete(item)">
                         </Td>
                         <Td>{{ item.title }}</Td>
+                        <Td>
+                            <a target="_blank" :href="item.url" :title="item.url">
+                                <UrlIcon />
+                            </a>
+                        </Td>
                         <Td :title="item.description">{{ item.description.slice(0, 75) }}</Td>
                         <Td>{{ item.created_at }}</Td>
                         <Td>
