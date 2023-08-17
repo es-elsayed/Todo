@@ -1,7 +1,5 @@
 <script setup>
-import { ref, watch, onMounted } from 'vue';
 import { Head, useForm, router } from '@inertiajs/vue3';
-// import { Inertia } from "@inertiajs/inertia";
 import AuthenticatedLayout from '@/admin/Layouts/AuthenticatedLayout.vue';
 import Container from '@/admin/Components/Container.vue';
 import Modal from '@/admin/Components/Modal.vue';
@@ -73,8 +71,7 @@ const complete = (item) => {
             <Button v-if="can.create" color="black" :href="route(`admin.${routeResourceName}.create`)">Create</Button>
         </template>
 
-        <Container>
-            <Card class="mt-4 overflow-x-auto">
+            <Card>
                 <BasicFilter v-model="filters" />
                 <Table :headers="headers" :items="items" class="max-w-full">
                     <template v-slot="{ item }">
@@ -109,6 +106,5 @@ const complete = (item) => {
                 </Modal>
             </Card>
 
-        </Container>
     </AuthenticatedLayout>
 </template>

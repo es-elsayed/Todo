@@ -1,7 +1,6 @@
 <script setup>
 import { Head, } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/admin/Layouts/AuthenticatedLayout.vue';
-import Container from '@/admin/Components/Container.vue';
 import Modal from '@/admin/Components/Modal.vue';
 import Card from '@/admin/Components/Card/Card.vue';
 import Table from '@/admin/Components/Table/Table.vue';
