@@ -24,6 +24,7 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $task = Task::query()
+            ->where('todo_id', $request->todo)
             ->select(['id', 'title', 'description', 'url', 'completed_at', 'created_at'])
             ->filter($request->search, ['title', 'description'])
             ->latest('id')
@@ -32,6 +33,7 @@ class TaskController extends Controller
         return Inertia::render('Task/Index', [
             'title' => 'Tasks',
             'items' => TaskResource::collection($task),
+            'todoId' => $request->todo,
             'headers' => [
                 [
                     'label' => '#',
@@ -80,10 +82,10 @@ class TaskController extends Controller
         $request->user()->tasks()->create($request->validated());
         return to_route('admin.tasks.index')->with('success', 'Task Created Successfully');
     }
-    public function edit(Task $task)
+    public function edit(Task $tasks)
     {
         return Inertia::render('Task/Create', [
-            'item' => new TaskResource($task),
+            'item' => new TaskResource($tasks),
             'action' => 'edit',
             'routeResourceName' => $this->routeResourceName,
         ]);

@@ -24,6 +24,10 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    todoId: {
+        type: Number,
+        required: true,
+    },
     headers: {
         type: Array,
         default: () => [],
@@ -59,8 +63,7 @@ const completeForm = useForm({});
 
 
 const complete = (item) => {
-    console.log(item, item.id);
-    completeForm.put(route(`admin.${props.routeResourceName}.complete`, item.id));
+    completeForm.put(route(`admin.${props.routeResourceName}.complete`, { todo: todoId, task: item.id }));
 };
 
 </script>
@@ -70,7 +73,8 @@ const complete = (item) => {
 
     <AuthenticatedLayout :title="title">
         <template #actions>
-            <Button v-if="can.create" color="black" :href="route(`admin.${routeResourceName}.create`)">Create</Button>
+            <Button v-if="can.create" color="black"
+                :href="route(`admin.${routeResourceName}.create`, { todo: todoId })">Create</Button>
         </template>
 
         <Container>
@@ -90,7 +94,7 @@ const complete = (item) => {
                         <Td :title="item.description">{{ item.description.slice(0, 75) }}</Td>
                         <Td>{{ item.created_at }}</Td>
                         <Td>
-                            <Actions :edit-link="route(`admin.${routeResourceName}.edit`, item.id)"
+                            <Actions :edit-link="route(`admin.${routeResourceName}.edit`, { todo: todoId, task: item.id })"
                                 :show-edit="item.can.update" :show-delete="item.can.delete"
                                 @deleteClicked="showDeleteModal(item)" />
                         </Td>

@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import Sidebar from './Sidebar.vue'
 import Header from './Header.vue'
+import Alert from '@/admin/Components/Alert.vue';
 
 const showingNavigationDropdown = ref(false);
 defineProps({
@@ -19,6 +20,7 @@ defineProps({
 
         <div class="flex flex-col flex-1 overflow-hidden">
             <Header />
+            <Alert />
 
             <section class="bg-gray-200">
                 <div class="container flex justify-between px-6 py-4 mx-auto sm:px-6 lg:px-8">

@@ -25,6 +25,7 @@ class TodoController extends Controller
     {
         $todo = Todo::query()
             ->select(['id', 'title', 'description', 'completed_at', 'created_at'])
+            ->withCount('tasks')
             ->filter($request->search, ['title', 'description'])
             ->latest('id')
             ->paginate(10);
@@ -40,6 +41,10 @@ class TodoController extends Controller
                 [
                     'label' => 'Title',
                     'data' => 'title',
+                ],
+                [
+                    'label' => 'Tasks',
+                    'data' => 'tasks_count',
                 ],
                 [
                     'label' => 'Description',

@@ -71,40 +71,46 @@ const complete = (item) => {
             <Button v-if="can.create" color="black" :href="route(`admin.${routeResourceName}.create`)">Create</Button>
         </template>
 
-            <Card>
-                <BasicFilter v-model="filters" />
-                <Table :headers="headers" :items="items" class="max-w-full">
-                    <template v-slot="{ item }">
-                        <Td>
-                            <input type="checkbox" name="completed_at" :checked="item.completed_at" @click="complete(item)">
-                        </Td>
-                        <Td>{{ item.title }}</Td>
-                        <Td :title="item.description">{{ item.description.slice(0, 75) }}</Td>
-                        <Td>{{ item.created_at }}</Td>
-                        <Td>
-                            <Actions :edit-link="route(`admin.${routeResourceName}.edit`, item.id)"
-                                :show-edit="item.can.update" :show-delete="item.can.delete"
-                                @deleteClicked="showDeleteModal(item)" />
-                        </Td>
-                    </template>
-                </Table>
-
-                <Modal :show="deleteModal" @close="closeModal" :title="`Delete: (${itemToDelete.name})`">
-
-                    <template #description>
-                        Once you are delete, you un-able to restore it again.
-                    </template>
-
-                    <template #footer>
-                        <Button color="white" @click="closeModal"> Cancel </Button>
-
-                        <Button color="red" class="ml-3" :class="{ 'opacity-25': completeForm.processing }"
-                            :disabled="completeForm.processing" @click="handleDeleteItem">
-                            Delete
+        <Card>
+            <BasicFilter v-model="filters" />
+            <Table :headers="headers" :items="items" class="max-w-full">
+                <template v-slot="{ item }">
+                    <Td>
+                        <input type="checkbox" name="completed_at" :checked="item.completed_at" @click="complete(item)">
+                    </Td>
+                    <Td>{{ item.title }}</Td>
+                    <Td>
+                        <Button v-if="item.tasks_count > 0"
+                            :href="route(`admin.tasks.index`, item.id)" small>
+                            {{ item.tasks_count }}
                         </Button>
-                    </template>
-                </Modal>
-            </Card>
+                        <span v-else>{{ "-" }}</span>
+                    </Td>
+                    <Td :title="item.description">{{ item.description.slice(0, 75) }}</Td>
+                    <Td>{{ item.created_at }}</Td>
+                    <Td>
+                        <Actions :edit-link="route(`admin.${routeResourceName}.edit`, item.id)" :show-edit="item.can.update"
+                            :show-delete="item.can.delete" @deleteClicked="showDeleteModal(item)" />
+                    </Td>
+                </template>
+            </Table>
+
+            <Modal :show="deleteModal" @close="closeModal" :title="`Delete: (${itemToDelete.name})`">
+
+                <template #description>
+                    Once you are delete, you un-able to restore it again.
+                </template>
+
+                <template #footer>
+                    <Button color="white" @click="closeModal"> Cancel </Button>
+
+                    <Button color="red" class="ml-3" :class="{ 'opacity-25': completeForm.processing }"
+                        :disabled="completeForm.processing" @click="handleDeleteItem">
+                        Delete
+                    </Button>
+                </template>
+            </Modal>
+        </Card>
 
     </AuthenticatedLayout>
 </template>
