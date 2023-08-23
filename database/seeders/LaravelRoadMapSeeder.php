@@ -15,8 +15,8 @@ class LaravelRoadMapSeeder extends Seeder
         $data = [
             ...$this->beginnerData(),
             ...$this->advancedBeginnerData(),
-            // ...$this->midlevelData(),
-            // ...$this->seniorData(),
+            ...$this->midlevelData(),
+            ...$this->seniorData(),
         ];
 
         $todo = Todo::create([
@@ -630,7 +630,6 @@ class LaravelRoadMapSeeder extends Seeder
                 "description" => "Laravel File Upload with FilePond: Step-by-Step.",
                 "url" => "https://www.youtube.com/watch?v=GRXaCfS1qj0",
             ],
-            // *********
             [
                 "title" => "API Basics (1)",
                 "description" => "How to Create Laravel API.",
@@ -1049,32 +1048,57 @@ class LaravelRoadMapSeeder extends Seeder
             ],
             [
                 "title" => "Jobs and Queues",
-                "description" => ".",
+                "description" => "Queues in Laravel.",
                 "url" => "https://laraveldaily.com/course/laravel-queues?utm_source=github&utm_campaign=roadmap",
             ],
             [
-                "title" => "Queueable Classes and Jobs",
-                "description" => ".",
+                "title" => "Queueable Classes and Jobs (1)",
+                "description" => "Creating Jobs.",
                 "url" => "https://laravel.com/docs/queues#creating-jobs",
             ],
             [
+                "title" => "Queueable Classes and Jobs (2)",
+                "description" => "Queueing Notifications.",
+                "url" => "https://laravel.com/docs/notifications#queueing-notifications",
+            ],
+            [
+                "title" => "Queueable Classes and Jobs (3)",
+                "description" => "Queued Event Listeners.",
+                "url" => "https://laravel.com/docs/events#queued-event-listeners",
+            ],
+            [
+                "title" => "Queueable Classes and Jobs (4)",
+                "description" => "Queueing Mail.",
+                "url" => "https://laravel.com/docs/mail#queueing-mail",
+            ],
+            [
+                "title" => "Queueable Classes and Jobs (5)",
+                "description" => "Laravel Queues 101: Example with Sending Emails.",
+                "url" => "https://www.youtube.com/watch?v=rVx8xKisbr8",
+            ],
+            [
                 "title" => "Job Dispatching, Batching and Chaining",
-                "description" => ".",
+                "description" => "Dispatching Jobs.",
                 "url" => "https://laravel.com/docs/queues#dispatching-jobs",
             ],
             [
                 "title" => "Processing Failed Jobs",
-                "description" => ".",
+                "description" => "Dealing with Failed Jobs.",
                 "url" => "https://laravel.com/docs/queues#dealing-with-failed-jobs",
             ],
             [
-                "title" => "Configuring Queues: Drivers, Redis, Supervisor",
-                "description" => ".",
+                "title" => "Configuring Queues: Drivers, Redis, Supervisor (1)",
+                "description" => "Running the Queue Worker.",
                 "url" => "https://laravel.com/docs/queues#running-the-queue-worker",
             ],
             [
+                "title" => "Configuring Queues: Drivers, Redis, Supervisor (2)",
+                "description" => "Configuring Supervisor.",
+                "url" => "https://laravel.com/docs/queues#supervisor-configuration",
+            ],
+            [
                 "title" => "Laravel Horizon (optional, if you use Redis)",
-                "description" => ".",
+                "description" => "Laravel Horizon.",
                 "url" => "https://laravel.com/docs/horizon",
             ],
             [
@@ -1084,38 +1108,88 @@ class LaravelRoadMapSeeder extends Seeder
             ],
             [
                 "title" => "Upload Files via API",
-                "description" => ".",
+                "description" => "Laravel API: How to Upload File from Vue.js.",
                 "url" => "https://blog.quickadminpanel.com/laravel-api-how-to-upload-file-from-vue-js/",
             ],
             [
-                "title" => "Generate API Documentation",
-                "description" => ".",
+                "title" => "Generate API Documentation (1)",
+                "description" => "Laravel API Documentation with OpenAPI/Swagger.",
                 "url" => "https://blog.quickadminpanel.com/laravel-api-documentation-with-openapiswagger/",
             ],
             [
-                "title" => "API Versioning",
-                "description" => ".",
+                "title" => "Generate API Documentation (2)",
+                "description" => "Scribe: New Package for Laravel API Documentation.",
+                "url" => "https://www.youtube.com/watch?v=PjwGI8c2IfA",
+            ],
+            [
+                "title" => "API Versioning (1)",
+                "description" => "Versioning your REST API with Laravel.",
                 "url" => "https://codimth.com/blog/web/laravel/versioning-your-rest-api-laravel",
             ],
             [
-                "title" => "API with OAuth and Laravel Passport",
-                "description" => ".",
+                "title" => "API Versioning (2)",
+                "description" => "Versioning your API: from V1 to V2 and Beyond [video from my course].",
+                "url" => "https://laraveldaily.com/lesson/laravel-api/versioning-v1-v2?utm_source=github&utm_campaign=roadmap",
+            ],
+            [
+                "title" => "API with OAuth and Laravel Passport (1)",
+                "description" => "Laravel Passport.",
                 "url" => "https://laravel.com/docs/passport",
             ],
             [
+                "title" => "API with OAuth and Laravel Passport (2)",
+                "description" => "Laravel API Auth Demo: Passport, oAuth and Sanctum.",
+                "url" => "https://www.youtube.com/watch?v=8myQdPL8I1s",
+            ],
+            [
                 "title" => "Only-API Projects with Front-end like Vue.js / React.js",
-                "description" => ".",
+                "description" => "Vue.js 3 + Laravel 9 SPA: CRUD with Auth.",
                 "url" => "https://laraveldaily.com/course/vue-laravel-spa?utm_source=github&utm_campaign=roadmap",
             ],
             [
+                "title" => "Only-API Projects with Front-end like Vue.js / React.js",
+                "description" => "React.js + Laravel: SPA CRUD with Auth.",
+                "url" => "https://laraveldaily.com/course/react-laravel-spa?utm_source=github&utm_campaign=roadmap",
+            ],
+            [
                 "title" => "Only-API Projects with Mobile Apps",
-                "description" => ".",
+                "description" => "Flutter Mobile App with Laravel API.",
                 "url" => "https://laraveldaily.com/course/flutter-laravel?utm_source=github&utm_campaign=roadmap",
+            ],
+            [
+                "title" => "Only-API Projects with Mobile Apps",
+                "description" => "Using Sanctum to authenticate a mobile app.",
+                "url" => "https://laravel-news.com/using-sanctum-to-authenticate-a-mobile-app",
             ],
             [
                 "title" => "(optional) Starter Kits: Laravel Jetstream and Fortify",
                 "description" => ".",
+                "url" => "",
+            ],
+            [
+                "title" => "Laravel Jetstream (requires Livewire/Inertia knowledge) (1)",
+                "description" => "Laravel Jetstream.",
+                "url" => "https://jetstream.laravel.com/",
+            ],
+            [
+                "title" => "Laravel Jetstream (requires Livewire/Inertia knowledge) (2)",
+                "description" => "Laravel Jetstream+Livewire: Real Mini-Project.",
                 "url" => "https://laraveldaily.teachable.com/p/laravel-jetstream-livewire-project?utm_source=github&utm_campaign=roadmap",
+            ],
+            [
+                "title" => "Laravel Jetstream (requires Livewire/Inertia knowledge) (3)",
+                "description" => "Laravel Jetstream: How it Works and Example How to Customize.",
+                "url" => "https://www.youtube.com/watch?v=d8YgWApHMfA",
+            ],
+            [
+                "title" => "Laravel Fortify (1)",
+                "description" => "Laravel Fortify.",
+                "url" => "https://laravel.com/docs/fortify",
+            ],
+            [
+                "title" => "Laravel Fortify (2)",
+                "description" => "Laravel Fortify: Four Auth Things to Customize.",
+                "url" => "https://www.youtube.com/watch?v=Vr4LJU3kw1g",
             ],
             [
                 "title" => "Payments",
@@ -1123,13 +1197,23 @@ class LaravelRoadMapSeeder extends Seeder
                 "url" => "",
             ],
             [
-                "title" => "Laravel Cashier with Stripe/Paddle",
-                "description" => "Integrate subscription billing with Stripe or Paddle using Laravel Cashier.",
+                "title" => "Laravel Cashier with Stripe (1)",
+                "description" => "Laravel Cashier (Stripe).",
                 "url" => "https://laravel.com/docs/billing",
             ],
             [
-                "title" => "Custom Payment Providers: PayPal, Mollie, etc",
-                "description" => "Explore custom payment integration with Laravel using providers like PayPal and Mollie.",
+                "title" => "Laravel Cashier with Paddle (2)",
+                "description" => "Laravel Cashier (Paddle).",
+                "url" => "https://laravel.com/docs/cashier-paddle",
+            ],
+            [
+                "title" => "Custom Payment Providers: PayPal, Mollie, etc (1)",
+                "description" => "Subscription billing with Laravel Cashier for Mollie",
+                "url" => "https://github.com/laravel/cashier-mollie",
+            ],
+            [
+                "title" => "Custom Payment Providers: PayPal, Mollie, etc (2)",
+                "description" => "How To Integrate Paypal Payment Gateway In Laravel",
                 "url" => "https://websolutionstuff.com/post/how-to-integrate-paypal-payment-gateway-in-laravel",
             ],
             [
@@ -1138,18 +1222,23 @@ class LaravelRoadMapSeeder extends Seeder
                 "url" => "",
             ],
             [
-                "title" => "TDD: Test-Driven Development",
-                "description" => "Learn about test-driven development (TDD) in Laravel.",
+                "title" => "TDD: Test-Driven Development (1)",
+                "description" => "Build A Laravel App With TDD.",
                 "url" => "https://laracasts.com/series/build-a-laravel-app-with-tdd",
             ],
             [
+                "title" => "TDD: Test-Driven Development (2)",
+                "description" => "TDD With Laravel",
+                "url" => "https://tddwithlaravel.com/",
+            ],
+            [
                 "title" => "Mocking",
-                "description" => "Understand how to use mocking in Laravel tests.",
+                "description" => "Mocking.",
                 "url" => "https://laravel.com/docs/mocking",
             ],
             [
                 "title" => "(optional) Laravel Dusk",
-                "description" => "Explore Laravel Dusk for browser testing.",
+                "description" => "Laravel Dusk.",
                 "url" => "https://laravel.com/docs/dusk",
             ],
             [
@@ -1159,13 +1248,23 @@ class LaravelRoadMapSeeder extends Seeder
             ],
             [
                 "title" => "Laravel Scout",
-                "description" => "Utilize Laravel Scout for full-text search functionality.",
+                "description" => "Laravel Scout.",
                 "url" => "https://laravel.com/docs/scout",
             ],
             [
-                "title" => "Drivers: ElasticSearch, Algolia or MeiliSearch",
-                "description" => "Learn about different search drivers for Laravel Scout.",
+                "title" => "Drivers: ElasticSearch, Algolia or MeiliSearch (1)",
+                "description" => "ElasticSearch Driver for Laravel Scout.",
                 "url" => "https://laravel-news.com/explorer",
+            ],
+            [
+                "title" => "Drivers: ElasticSearch, Algolia or MeiliSearch (2)",
+                "description" => "Algolia: Scout Extended.",
+                "url" => "https://www.algolia.com/doc/framework-integration/laravel/getting-started/introduction-to-scout-extended/?client=php",
+            ],
+            [
+                "title" => "Drivers: ElasticSearch, Algolia or MeiliSearch",
+                "description" => "Full-Text Search with MeiliSearch and Laravel Scout.",
+                "url" => "https://tighten.co/blog/full-text-search-with-meilisearch-and-scout/",
             ],
             [
                 "title" => "Laravel Packages",
@@ -1174,13 +1273,18 @@ class LaravelRoadMapSeeder extends Seeder
             ],
             [
                 "title" => "Contributing to Packages, making Pull Requests",
-                "description" => "Contribute to Laravel packages by making pull requests.",
+                "description" => "How to Contribute to Laravel Docs (or any open-source repository).",
                 "url" => "https://www.youtube.com/watch?v=vEcT6JIFji0",
             ],
             [
-                "title" => "Create Laravel Packages",
-                "description" => "Learn how to develop and create your own Laravel packages.",
+                "title" => "Create Laravel Packages (1)",
+                "description" => "Package Development.",
                 "url" => "https://laravel.com/docs/packages",
+            ],
+            [
+                "title" => "Create Laravel Packages (2)",
+                "description" => "Laravel Package Development.",
+                "url" => "https://laravelpackage.com/",
             ],
         ];
     }

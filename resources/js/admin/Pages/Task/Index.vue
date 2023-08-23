@@ -77,46 +77,43 @@ const complete = (item) => {
                 :href="route(`admin.${routeResourceName}.create`, { todo: todoId })">Create</Button>
         </template>
 
-        <Container>
-            <Card class="mt-4 overflow-x-auto">
-                <BasicFilter v-model="filters" />
-                <Table :headers="headers" :items="items" class="max-w-full">
-                    <template v-slot="{ item }">
-                        <Td>
-                            <input type="checkbox" name="completed_at" :checked="item.completed_at" @click="complete(item)">
-                        </Td>
-                        <Td>{{ item.title }}</Td>
-                        <Td>
-                            <a class="text-blue-700" target="_blank" :href="item.url" :title="item.url">
-                                {{ item.description ? item.description.slice(0, 75) : item.title.slice(0, 75) }}
-                            </a>
-                        </Td>
-                        <Td>{{ item.created_at }}</Td>
-                        <Td>
-                            <Actions :edit-link="route(`admin.${routeResourceName}.edit`, { todo: todoId, task: item.id })"
-                                :show-edit="item.can.update" :show-delete="item.can.delete"
-                                @deleteClicked="showDeleteModal(item)" />
-                        </Td>
-                    </template>
-                </Table>
+        <Card>
+            <BasicFilter v-model="filters" />
+            <Table :headers="headers" :items="items" class="max-w-full">
+                <template v-slot="{ item }">
+                    <Td>
+                        <input type="checkbox" name="completed_at" :checked="item.completed_at" @click="complete(item)">
+                    </Td>
+                    <Td :title="item.title">{{ item.title.slice(0, 30) }}</Td>
+                    <Td>
+                        <a class="text-blue-700" target="_blank" :href="item.url" :title="item.url">
+                            {{ item.description ? item.description.slice(0, 50) : item.title.slice(0, 50) }}
+                        </a>
+                    </Td>
+                    <Td>{{ item.created_at }}</Td>
+                    <Td>
+                        <Actions :edit-link="route(`admin.${routeResourceName}.edit`, { todo: todoId, task: item.id })"
+                            :show-edit="item.can.update" :show-delete="item.can.delete"
+                            @deleteClicked="showDeleteModal(item)" />
+                    </Td>
+                </template>
+            </Table>
 
-                <Modal :show="deleteModal" @close="closeModal" :title="`Delete: (${itemToDelete.name})`">
+            <Modal :show="deleteModal" @close="closeModal" :title="`Delete: (${itemToDelete.name})`">
 
-                    <template #description>
-                        Once you are delete, you un-able to restore it again.
-                    </template>
+                <template #description>
+                    Once you are delete, you un-able to restore it again.
+                </template>
 
-                    <template #footer>
-                        <Button color="white" @click="closeModal"> Cancel </Button>
+                <template #footer>
+                    <Button color="white" @click="closeModal"> Cancel </Button>
 
-                        <Button color="red" class="ml-3" :class="{ 'opacity-25': completeForm.processing }"
-                            :disabled="completeForm.processing" @click="handleDeleteItem">
-                            Delete
-                        </Button>
-                    </template>
-                </Modal>
-            </Card>
-
-        </Container>
+                    <Button color="red" class="ml-3" :class="{ 'opacity-25': completeForm.processing }"
+                        :disabled="completeForm.processing" @click="handleDeleteItem">
+                        Delete
+                    </Button>
+                </template>
+            </Modal>
+        </Card>
     </AuthenticatedLayout>
 </template>

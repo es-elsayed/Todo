@@ -27,13 +27,12 @@ class TaskController extends Controller
             ->where('todo_id', $request->todo)
             ->select(['id', 'title', 'description', 'url', 'completed_at', 'created_at'])
             ->filter($request->search, ['title', 'description'])
-            ->latest('id')
-            ->paginate(10);
+            ->paginate(25);
 
         return Inertia::render('Task/Index', [
             'title' => 'Tasks',
             'items' => TaskResource::collection($task),
-            'todoId' => $request->todo,
+            'todoId' => (int) $request->todo,
             'headers' => [
                 [
                     'label' => '#',
