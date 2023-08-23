@@ -1,5 +1,7 @@
 <script setup>
+import { ref, watch, onMounted } from 'vue';
 import { Head, useForm, router } from '@inertiajs/vue3';
+// import { Inertia } from "@inertiajs/inertia";
 import AuthenticatedLayout from '@/admin/Layouts/AuthenticatedLayout.vue';
 import Container from '@/admin/Components/Container.vue';
 import Modal from '@/admin/Components/Modal.vue';
@@ -21,6 +23,10 @@ const props = defineProps({
     items: {
         type: Object,
         default: () => ({}),
+    },
+    todoId: {
+        type: Number,
+        required: true,
     },
     headers: {
         type: Array,
@@ -57,8 +63,7 @@ const completeForm = useForm({});
 
 
 const complete = (item) => {
-    console.log(item, item.id);
-    completeForm.put(route(`admin.${props.routeResourceName}.complete`, item.id));
+    completeForm.put(route(`admin.${props.routeResourceName}.complete`, { todo: todoId, task: item.id }));
 };
 
 </script>
@@ -68,7 +73,8 @@ const complete = (item) => {
 
     <AuthenticatedLayout :title="title">
         <template #actions>
-            <Button v-if="can.create" color="black" :href="route(`admin.${routeResourceName}.create`)">Create</Button>
+            <Button v-if="can.create" color="black"
+                :href="route(`admin.${routeResourceName}.create`, { todo: todoId })">Create</Button>
         </template>
 
         <Card>
@@ -78,19 +84,17 @@ const complete = (item) => {
                     <Td>
                         <input type="checkbox" name="completed_at" :checked="item.completed_at" @click="complete(item)">
                     </Td>
-                    <Td>{{ item.title }}</Td>
+                    <Td :title="item.title">{{ item.title.slice(0, 30) }}</Td>
                     <Td>
-                        <Button v-if="item.tasks_count > 0"
-                            :href="route(`admin.tasks.index`, item.id)" small>
-                            {{ item.tasks_count }}
-                        </Button>
-                        <span v-else>{{ "-" }}</span>
+                        <a class="text-blue-700" target="_blank" :href="item.url" :title="item.url">
+                            {{ item.description ? item.description.slice(0, 50) : item.title.slice(0, 50) }}
+                        </a>
                     </Td>
-                    <Td :title="item.description">{{ item.description?.slice(0, 75) }}</Td>
                     <Td>{{ item.created_at }}</Td>
                     <Td>
-                        <Actions :edit-link="route(`admin.${routeResourceName}.edit`, item.id)" :show-edit="item.can.update"
-                            :show-delete="item.can.delete" @deleteClicked="showDeleteModal(item)" />
+                        <Actions :edit-link="route(`admin.${routeResourceName}.edit`, { todo: todoId, task: item.id })"
+                            :show-edit="item.can.update" :show-delete="item.can.delete"
+                            @deleteClicked="showDeleteModal(item)" />
                     </Td>
                 </template>
             </Table>
@@ -111,6 +115,5 @@ const complete = (item) => {
                 </template>
             </Modal>
         </Card>
-
     </AuthenticatedLayout>
 </template>

@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\TodoRequest;
-use App\Http\Resources\TodoResource;
-use App\Models\Todo;
+use App\Http\Requests\Admin\TaskRequest;
+use App\Http\Resources\TaskResource;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class TodoController extends Controller
+class TaskController extends Controller
 {
-    private string $routeResourceName = 'todos';
+    private string $routeResourceName = 'tasks';
 
     public function __construct()
     {
@@ -23,16 +23,16 @@ class TodoController extends Controller
 
     public function index(Request $request)
     {
-        $todo = Todo::query()
-            ->select(['id', 'title', 'description', 'completed_at', 'created_at'])
-            ->withCount('tasks')
+        $task = Task::query()
+            ->where('todo_id', $request->todo)
+            ->select(['id', 'title', 'description', 'url', 'completed_at', 'created_at'])
             ->filter($request->search, ['title', 'description'])
-            ->latest('id')
-            ->paginate(10);
+            ->paginate(25);
 
-        return Inertia::render('Todo/Index', [
-            'title' => 'Todos',
-            'items' => TodoResource::collection($todo),
+        return Inertia::render('Task/Index', [
+            'title' => 'Tasks',
+            'items' => TaskResource::collection($task),
+            'todoId' => (int) $request->todo,
             'headers' => [
                 [
                     'label' => '#',
@@ -41,10 +41,6 @@ class TodoController extends Controller
                 [
                     'label' => 'Title',
                     'data' => 'title',
-                ],
-                [
-                    'label' => 'Tasks',
-                    'data' => 'tasks_count',
                 ],
                 [
                     'label' => 'Description',
@@ -62,7 +58,7 @@ class TodoController extends Controller
             'routeResourceName' => $this->routeResourceName,
             'filters' => (object) $request->all(),
             'can' => [
-                'create' => $request->user()?->can('todos-create'),
+                'create' => $request->user()?->can('tasks-create'),
             ],
         ]);
 
@@ -70,35 +66,35 @@ class TodoController extends Controller
 
     public function create()
     {
-        return Inertia::render('Todo/Create', [
+        return Inertia::render('Task/Create', [
             'action' => 'create',
             'routeResourceName' => $this->routeResourceName,
         ]);
     }
 
-    public function store(TodoRequest $request)
+    public function store(TaskRequest $request)
     {
-        $request->user()->todos()->create($request->validated());
-        return to_route('admin.todos.index')->with('success', 'Todo Created Successfully');
+        $request->user()->tasks()->create($request->validated());
+        return to_route('admin.tasks.index')->with('success', 'Task Created Successfully');
     }
-    public function edit(Todo $todo)
+    public function edit(Task $tasks)
     {
-        return Inertia::render('Todo/Create', [
-            'item' => new TodoResource($todo),
+        return Inertia::render('Task/Create', [
+            'item' => new TaskResource($tasks),
             'action' => 'edit',
             'routeResourceName' => $this->routeResourceName,
         ]);
     }
 
-    public function update(TodoRequest $request, Todo $todo)
+    public function update(TaskRequest $request, Task $task)
     {
-        $todo->update($request->validated());
-        return to_route('admin.todos.index')->with('success', 'Todo Updated Successfully');
+        $task->update($request->validated());
+        return to_route('admin.tasks.index')->with('success', 'Task Updated Successfully');
     }
 
-    public function destroy(Todo $todo)
+    public function destroy(Task $task)
     {
-        $todo->delete();
-        return to_route('admin.todos.index')->with('error', 'Todo Deleted Successfully');
+        $task->delete();
+        return to_route('admin.tasks.index')->with('error', 'Task Deleted Successfully');
     }
 }

@@ -7,21 +7,22 @@ use App\Traits\Userable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Todo extends Model
+class Task extends Model
 {
-    use HasFactory, FilterableTrait, Userable;
+    use HasFactory, FilterableTrait;
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
+        'todo_id',
         'title',
         'description',
+        'due_date',
         'completed_at',
+        'url',
     ];
 
     /**
@@ -33,14 +34,9 @@ class Todo extends Model
         'completed_at' => 'datetime',
     ];
 
-    public function user(): BelongsTo
+    public function todo(): BelongsTo
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function tasks(): HasMany
-    {
-        return $this->hasMany(Task::class);
+        return $this->belongsTo(Todo::class);
     }
 
 }

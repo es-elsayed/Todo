@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             AssingPermissionToUserRoleSeeder::class,
             SuperUserSeeder::class,
             // UserSeeder::class,
-            // TodoSeeder::class,
+            // LaravelRoadMapSeeder::class,
 
         ]);
     }

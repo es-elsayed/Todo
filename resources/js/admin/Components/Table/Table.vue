@@ -2,6 +2,8 @@
 import Th from "./Th.vue";
 import Tr from "./Tr.vue";
 import Td from "./Td.vue";
+import { Link } from '@inertiajs/vue3';
+
 defineProps({
     headers: {
         type: Array,
@@ -14,28 +16,38 @@ defineProps({
 })
 </script>
 <template>
-    <!-- <div class="overflow-x-auto "> -->
-    <div class="sm:-mx-6 lg:-mx-8">
-        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-            <div class="overflow-x-auto">
-                <table class="min-w-full text-sm font-light text-left">
-                    <thead class="font-medium border-b dark:border-neutral-500">
-                        <Th v-for="header in headers" :key="header.lable">{{ header.label }}</Th>
-                    </thead>
-                    <tbody>
-                        <Tr v-if="items.data.length === 0">
-                            <Td :colspan="headers.length">
-                                No Data Available
-                            </Td>
-                        </Tr>
-                        <Tr v-else v-for="item in items.data" :key="item.id">
-                            <slot :item="item" />
-                        </Tr>
+    <div>
+        <table class="min-w-full my-6">
 
-                    </tbody>
-                </table>
-            </div>
+            <thead>
+                <Th v-for="header in headers" :key="header.lable">{{ header.label }}</Th>
+            </thead>
+
+            <tbody class="bg-white">
+                <Tr v-if="items.data.length === 0">
+                    <Td :colspan="headers.length">
+                        No Data Available
+                    </Td>
+                </Tr>
+                <Tr v-else v-for="item in items.data" :key="item.id">
+                    <slot :item="item" />
+                </Tr>
+            </tbody>
+
+        </table>
+        <div>
+            <Link :href="items.links.prev ?? ''" :class="{
+                'px-4 py-2 text-sm font-semibold text-gray-800 bg-gray-300 rounded-l hover:bg-gray-400': true,
+                'cursor-not-allowed opacity-50': !items.links.prev
+            }">
+            Prev
+            </Link>
+            <Link :href="items.links.next ?? ''" :class="{
+                'px-4 py-2 text-sm font-semibold text-gray-800 bg-gray-300 rounded-r hover:bg-gray-400': true,
+                'cursor-not-allowed opacity-50': !items.links.next
+            }">
+            Next
+            </Link>
         </div>
-        <!-- </div> -->
     </div>
 </template>

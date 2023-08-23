@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CompleteTaskController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PermissionRoleController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TodoController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CompleteTodoController;
+use App\Http\Controllers\Admin\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,4 +30,9 @@ Route::group(['middleware' => 'verified'], function () {
     Route::resource('users', UserController::class);
     Route::put('todos/{todo}/complete', CompleteTodoController::class)->middleware('can:todos-update')->name('todos.complete');
     Route::resource('todos', TodoController::class);
+    Route::put('tasks/{task}/complete', CompleteTaskController::class)->middleware('can:tasks-update')->name('tasks.complete');
+    Route::resource('todos/{todo}/tasks', TaskController::class)->parameters([
+        'tasks' => 'task', // Use 'task_id' instead of 'tasks' as the parameter name
+        'todos' => 'todo', // Use 'todo_id' instead of 'todos' as the parameter name
+    ]);
 });
