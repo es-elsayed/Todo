@@ -44,10 +44,6 @@ class TaskController extends Controller
                     'data' => 'title',
                 ],
                 [
-                    'label' => 'Url',
-                    'data' => 'url',
-                ],
-                [
                     'label' => 'Description',
                     'data' => 'description',
                 ],

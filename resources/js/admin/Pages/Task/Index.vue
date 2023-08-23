@@ -87,11 +87,10 @@ const complete = (item) => {
                         </Td>
                         <Td>{{ item.title }}</Td>
                         <Td>
-                            <a target="_blank" :href="item.url" :title="item.url">
-                                <UrlIcon />
+                            <a class="text-blue-700" target="_blank" :href="item.url" :title="item.url">
+                                {{ item.description ? item.description.slice(0, 75) : item.title.slice(0, 75) }}
                             </a>
                         </Td>
-                        <Td :title="item.description">{{ item.description.slice(0, 75) }}</Td>
                         <Td>{{ item.created_at }}</Td>
                         <Td>
                             <Actions :edit-link="route(`admin.${routeResourceName}.edit`, { todo: todoId, task: item.id })"

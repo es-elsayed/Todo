@@ -86,7 +86,7 @@ const complete = (item) => {
                         </Button>
                         <span v-else>{{ "-" }}</span>
                     </Td>
-                    <Td :title="item.description">{{ item.description.slice(0, 75) }}</Td>
+                    <Td :title="item.description">{{ item.description?.slice(0, 75) }}</Td>
                     <Td>{{ item.created_at }}</Td>
                     <Td>
                         <Actions :edit-link="route(`admin.${routeResourceName}.edit`, item.id)" :show-edit="item.can.update"
